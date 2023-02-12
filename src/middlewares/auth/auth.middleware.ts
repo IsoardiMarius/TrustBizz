@@ -17,7 +17,6 @@ export const AuthMiddleware = (request, response, next: express.NextFunction) =>
     }
 
     const user: IUser = users.find((usr) => usr.token === authorizationHeader);
-
     Object.assign(request, { user, isAuthenticated: true });
 
     next();

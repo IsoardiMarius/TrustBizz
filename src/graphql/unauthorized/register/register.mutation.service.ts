@@ -11,13 +11,6 @@ export default class RegisterMutationService {
                 const user = res.rows[0];
                 const accessToken =  generateAccessToken(user);
                 const refreshToken = generateRefreshToken(user);
-                const newUser = {
-                    ...user,
-                    accessToken,
-                    refreshToken
-                }
-
-                console.log(newUser);
 
                 return {
                     ...user,
