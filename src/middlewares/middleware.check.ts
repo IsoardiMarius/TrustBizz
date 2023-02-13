@@ -16,6 +16,7 @@ export const middlewareCheck = (data: IMiddlewareCheckInputType[],  context: ICo
         switch (item.type) {
             case MiddlewareType.ACL:
                 if (!isAllowed(context.user, item.roles)) {
+                    console.log('context.user: -----', context, 'item.roles: ----', item.roles);
                     throw new Error(MESSAGE_YOU_DONT_HAVE_REQUIRED_PERMISSIONS);
                 }
 

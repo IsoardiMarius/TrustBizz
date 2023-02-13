@@ -26,7 +26,13 @@ export default class RegisterMutationService {
                     id: user.id,
                     roles: [USER_ROLES.View, USER_ROLES.Delete]
                 });
-                const refreshToken = generateRefreshToken(user);
+                const refreshToken = generateRefreshToken(
+                    {
+                        email: user.email,
+                        id: user.id,
+                        roles: [USER_ROLES.View, USER_ROLES.Delete]
+                    }
+                );
 
                 return {
                     ...user,
