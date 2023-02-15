@@ -1,7 +1,7 @@
 import {USER_ROLES} from "../../../helpers/fake-db.helper";
+import {generateAccessToken, generateRefreshToken} from '../../../services/middleware.token';
 
 const db = require('../../../database');
-import {generateAccessToken, generateRefreshToken} from '../../../middlewares/middleware.token';
 require('dotenv').config();
 
 
@@ -14,7 +14,7 @@ type UserDataResponse = {
 }
 export default class RegisterMutationService {
 
-    register(email: string, password: string): UserDataResponse {
+    register(email: string, password: string): UserDataResponse | Error {
 
         const query = `INSERT INTO users (email, password) VALUES ('${email}', '${password}') RETURNING *`;
 
@@ -24,13 +24,15 @@ export default class RegisterMutationService {
                 const accessToken =  generateAccessToken({
                     email: user.email,
                     id: user.id,
-                    roles: [USER_ROLES.View, USER_ROLES.Delete]
+                    roles: [USER_ROLES.View, USER_ROLES.Delete],
+                    ip: "::ffff:127.0.0.1"
                 });
                 const refreshToken = generateRefreshToken(
                     {
                         email: user.email,
                         id: user.id,
-                        roles: [USER_ROLES.View, USER_ROLES.Delete]
+                        roles: [USER_ROLES.View, USER_ROLES.Delete],
+                        ip:  "::ffff:127.0.0.1"
                     }
                 );
 

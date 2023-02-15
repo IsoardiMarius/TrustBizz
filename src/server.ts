@@ -2,7 +2,8 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import AuthMiddleware from "./middlewares/auth/auth.middleware";
-import { generateMiddlewareGraphql } from "./middlewares/graphql-express/graphql-express.middleware";
+import {generateMiddlewareGraphql} from "./middlewares/graphql-express/graphql-express.middleware";
+
 require('dotenv').config();
 
 
@@ -12,10 +13,6 @@ require('dotenv').config();
 
     const app = express();
     const graphqlMiddleware = await generateMiddlewareGraphql();
-
-
-
-
 
     app.use(cors());
     app.use(bodyParser.json({limit: '501mb'}));
