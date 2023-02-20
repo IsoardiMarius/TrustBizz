@@ -1,0 +1,36 @@
+{
+  "name": "graphql-middlewares-schema-generating",
+  "version": "1.0.0",
+  "description": "Graphql dynamic schema generating and middleware usage",
+  "main": "server.ts",
+  "scripts": {
+    "start": "../backend/node_modules/.bin/nodemon src/server.ts",
+    "lint": "../node_modules/.bin/eslint . --ext .ts"
+  },
+  "author": "Nenad Borovcanin",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.1",
+    "apollo-server-express": "^2.10.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.1",
+    "glob": "^7.1.6",
+    "graphql": "^14.6.0",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.9.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.3",
+    "@types/express": "^4.17.2",
+    "@types/glob": "^7.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "nodemon": "^2.0.2",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.2"
+  }
+}
