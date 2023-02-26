@@ -11,7 +11,8 @@ export const generateMiddlewareGraphql = () => {
 
             // Here we are creating context which will be passed to resolvers and will be used for authorization
             const context = {
-                isAuthenticated: false
+                isAuthenticated: false,
+                request
             };
 
             // If user is authenticated attach additional info to context which will be passed to resolvers and will be used for authorization

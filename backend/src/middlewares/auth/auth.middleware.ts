@@ -1,11 +1,12 @@
 import * as  express from 'express';
-import {verifyToken} from "../../services/service.token";
+import {verifyToken} from "../../token/service.token";
 
 require('dotenv').config();
 
 
 
 export const AuthMiddleware = async (request, response, next: express.NextFunction): Promise<void | Error>  => {
+
 
     // Init isAuthenticated to false
     request.isAuthenticated = false;
@@ -32,8 +33,9 @@ export const AuthMiddleware = async (request, response, next: express.NextFuncti
             ip: request?.ip,
         };
 
+        // If the access token is not valid, return next() whit isAuthenticated = false
         if(!decodedAccessToken) {
-            return next()
+           return next();
         }
 
         // If the ip address from the request is not the same
@@ -49,24 +51,10 @@ export const AuthMiddleware = async (request, response, next: express.NextFuncti
         // If the access token is expired, try to get the refresh token
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
-            console.log('TokenExpiredError')
-
-           const test = verifyToken(request.headers.refreshtoken, process.env.REFRESH_TOKEN_SECRET)
-            //
-            // if(test) {
-            //     const user = {
-            //         email: test?.email,
-            //         id: test?.id,
-            //         roles: test?.roles,
-            //         ip: request?.ip,
-            //     };
-            //
-            //     Object.assign(request, { user, isAuthenticated: true });
-            //     next()
-            // }
-            // else
+            // If token is expired, return response with status 401 and message Unauthorized
             return response.status(401).json({message: 'Unauthorizedd'});
         }
+        else return next()
             }
 }
 

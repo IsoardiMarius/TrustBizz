@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import axiosInstance from './axios.conf';
+import axiosInstanceAuthRequired from './axios.conf';
 
 
 function App() {
@@ -8,30 +8,17 @@ function App() {
 
     const  test = async () => {
         // get access token from cookies httponly
-        const access_token  =  localStorage.getItem('access_token');
-        const refresh_token = localStorage.getItem('refresh_token');
-        console.log(access_token);
-        console.log(refresh_token);
-
-      axiosInstance.post("/graphql",  {
+        axiosInstanceAuthRequired.post("/graphql",  {
             query: `
          query GetAllBooks {
     getAllBooks {
         author
         id
     }
-}
-        `,
-        },
-            {
-                headers: {
-                    Authorization: `${access_token}`,
-                    refreshtoken: `${refresh_token}`,
-                }
-            })
-
+} `,
+        })
             .then((res) => {
-                console.log(res)
+                console.log(res);
             })
             .catch((err) => {
                 console.log(err);

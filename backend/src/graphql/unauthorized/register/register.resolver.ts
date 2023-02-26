@@ -5,7 +5,7 @@ const registerQueryService = new RegisterMutationService();
 const registerResolver = {
     Mutation: {
         register(parent, {input: {email, password}}, ctx) {
-            return registerQueryService.register(email, password)
+            return registerQueryService.register(email, password, ctx.request.ip)
         },
     }
 };
